@@ -9,6 +9,7 @@ admin.site.register(KnowsLanguage)
 
 from django.forms import TextInput
 class OpeningHoursInline(admin.TabularInline):
+    insert_after = 'curreny_Accepted'
     model = OpeningHours
     extra = 0
 
@@ -19,94 +20,62 @@ class OpeningHoursInline(admin.TabularInline):
 
 
 class AvailableServiceInline(admin.StackedInline):
+    insert_after = 'additional_Type'
     model = AvailableService
     extra = 0
 
 class AdressInline(admin.StackedInline):
+    insert_after = 'payment_Accepted'
     model = Adress
     extra = 0
 
 class GeoInline(admin.StackedInline):
+    insert_after = 'payment_Accepted'
+
     model = Geo
     extra = 0
 
 class AreaServedInline(admin.StackedInline):
+    insert_after = 'isAcceptingNewPatients'
+
     model = AreaServed
     extra = 0
 
 class ContactPointInline(admin.StackedInline):
+    insert_after = 'isAcceptingNewPatients'
+
     model = ContactPoint
     extra = 0
 
 class EmployeeInline(admin.StackedInline):
+    insert_after = 'isAcceptingNewPatients'
+
     model = Employee
     extra = 0
 
 class ImageInline(admin.StackedInline):
+    insert_after = 'knows_language'
+
     model = Image
     extra = 0
 
 class HaspartInline(admin.StackedInline):
+    insert_after = 'pub_url'
+
     model = Haspart
     extra = 0
 
 class BusinessAdmin(admin.ModelAdmin):
-    fields = ["type",'map_id','additional_Type','Avail','medical_Specialty','curreny_Accepted','Open','payment_Accepted','Adress','Geo','hasMap','logo','telephone','isAcceptingNewPatients','AreaServed','ContactPoint','Employee','knows_language','Image','url','name','AlternateName','description','disambiguatingDescription','foundingDate','SameAs','pub_type','publisher_id','pub_name','website_id','pub_url','Has',]
-  
+    fields = ["type",'map_id','additional_Type','medical_Specialty','curreny_Accepted',"payment_Accepted","hasMap","logo","telephone","isAcceptingNewPatients","knows_language","url","name","AlternateName","description","disambiguatingDescription","foundingDate","SameAs","pub_type","publisher_id","pub_name","website_id","pub_url"]
 
     inlines = [AvailableServiceInline,OpeningHoursInline,AdressInline,GeoInline,AreaServedInline,ContactPointInline,EmployeeInline,ImageInline,HaspartInline]
-    readonly_fields = ('Avail','Open','Adress','Geo','AreaServed','ContactPoint','Employee','Image','Has',) 
 
-    def Avail(self, *args, **kwargs):
-        context = getattr(self.response, 'context_data', None) or {}
-        inline = context['inline_admin_formset'] = context['inline_admin_formsets'].pop(0)
-        return get_template(inline.opts.template).render(context, self.request)
-    
-    def Open(self, *args, **kwargs):
-        context = getattr(self.response, 'context_data', None) or {}
-        inline = context['inline_admin_formset'] = context['inline_admin_formsets'].pop(0)
-        return get_template(inline.opts.template).render(context, self.request)
-    
-    def Adress(self, *args, **kwargs):
-        context = getattr(self.response, 'context_data', None) or {}
-        inline = context['inline_admin_formset'] = context['inline_admin_formsets'].pop(0)
-        return get_template(inline.opts.template).render(context, self.request)
-    
-    def Geo(self, *args, **kwargs):
-        context = getattr(self.response, 'context_data', None) or {}
-        inline = context['inline_admin_formset'] = context['inline_admin_formsets'].pop(0)
-        return get_template(inline.opts.template).render(context, self.request)
-    
-    def AreaServed(self, *args, **kwargs):
-        context = getattr(self.response, 'context_data', None) or {}
-        inline = context['inline_admin_formset'] = context['inline_admin_formsets'].pop(0)
-        return get_template(inline.opts.template).render(context, self.request)
-    
-    def ContactPoint(self, *args, **kwargs):
-        context = getattr(self.response, 'context_data', None) or {}
-        inline = context['inline_admin_formset'] = context['inline_admin_formsets'].pop(0)
-        return get_template(inline.opts.template).render(context, self.request)
-    
-    def Employee(self, *args, **kwargs):
-        context = getattr(self.response, 'context_data', None) or {}
-        inline = context['inline_admin_formset'] = context['inline_admin_formsets'].pop(0)
-        return get_template(inline.opts.template).render(context, self.request)
-    
-    def Image(self, *args, **kwargs):
-        context = getattr(self.response, 'context_data', None) or {}
-        inline = context['inline_admin_formset'] = context['inline_admin_formsets'].pop(0)
-        return get_template(inline.opts.template).render(context, self.request)
-    
-    def Has(self, *args, **kwargs):
-        context = getattr(self.response, 'context_data', None) or {}
-        inline = context['inline_admin_formset'] = context['inline_admin_formsets'].pop(0)
-        return get_template(inline.opts.template).render(context, self.request)
-
-    def render_change_form(self, request, *args, **kwargs):
-        self.request = request
-        self.response = super().render_change_form(request, *args, **kwargs)
-        return self.response
-    
-    
-
+    change_form_template = 'admin/custom/change_form.html'
+    class Media:
+        css = {
+            'all': (
+                'css/admin.css',
+            )
+        }
+   
 admin.site.register(Business, BusinessAdmin)

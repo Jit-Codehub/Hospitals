@@ -27,36 +27,46 @@ class KnowsLanguage(models.Model):
     def __str__(self):
         return self.language
 
+
 class Business(models.Model):
     type = models.CharField(max_length=255)
-    map_id = models.URLField(max_length=1000,null=True)
-    additional_Type = models.URLField(max_length=1000,null=True)
+    map_id = models.URLField()
+    additional_Type = models.URLField()
     medical_Specialty = models.CharField(max_length=255,null=True)
     curreny_Accepted = models.ManyToManyField(Currency)
     payment_Accepted = models.CharField(max_length=255,null=True)
     hasMap = models.CharField(max_length=1000,null=True)
+    logo = models.URLField()
     telephone = models.CharField(max_length=255,null=True)
     isAcceptingNewPatients = models.CharField(max_length=255, choices=STATUS_PATIENT)
     knows_language = models.ManyToManyField(KnowsLanguage)
-    url = models.URLField(max_length=1000,null=True)
+    url = models.URLField()
     name = models.CharField(max_length=255)
     AlternateName = models.CharField(max_length=255)
     description = models.TextField()
     disambiguatingDescription = models.TextField()
     foundingDate = models.CharField(max_length=255)
     SameAs = models.TextField()
-
-class Website(models.Model):
-    type = models.CharField(max_length=255)
-    publisher_id = models.URLField(max_length=1000,null=True)
-    name = models.CharField(max_length=100)
+    pub_type = models.CharField(max_length=255)
+    publisher_id = models.URLField()
+    pub_name = models.CharField(max_length=100)
     website_id = models.CharField(max_length=100)
-    url = models.URLField()
+    pub_url = models.URLField()
 
-class Haspart(models.Model):
-    website = models.ForeignKey(Website, on_delete=models.CASCADE)
-    type = models.CharField(max_length=255,null=True)
-    haspart_id = models.URLField(max_length=1000,null=True)
+
+
+
+# class Website(models.Model):
+#     type = models.CharField(max_length=255)
+#     publisher_id = models.URLField()
+#     name = models.CharField(max_length=100)
+#     website_id = models.CharField(max_length=100)
+#     url = models.URLField()
+
+# class Haspart(models.Model):
+#     website = models.ForeignKey(Website, on_delete=models.CASCADE)
+#     h_type = models.CharField(max_length=255,null=True)
+#     haspart_id = models.URLField()
 
 
 
@@ -65,7 +75,10 @@ class Haspart(models.Model):
     
 
 
-
+class Haspart(models.Model):
+    business = models.ForeignKey(Business, on_delete=models.CASCADE)
+    h_type = models.CharField(max_length=255,null=True)
+    haspart_id = models.URLField()
 
 
     
@@ -76,9 +89,9 @@ class AvailableService(models.Model):
     type = models.CharField(max_length=255)
     code = models.CharField(max_length=255)
     name = models.CharField(max_length=255)
-    sameAs = models.URLField(max_length=255)
+    sameAs = models.URLField()
     description = models.TextField()
-    url = models.URLField(max_length=1000)
+    url = models.URLField()
 
 
 class OpeningHours(models.Model):
@@ -108,7 +121,7 @@ class AreaServed(models.Model):
     business = models.ForeignKey(Business, on_delete=models.CASCADE)
     type = models.CharField(max_length=255)
     name = models.CharField(max_length=255)
-    area_id = models.URLField(max_length=1000,null=True)
+    area_id = models.URLField()
 
 class ContactPoint(models.Model):
     business = models.ForeignKey(Business, on_delete=models.CASCADE)
@@ -118,13 +131,13 @@ class ContactPoint(models.Model):
 
 class Employee(models.Model):
     business = models.ForeignKey(Business, on_delete=models.CASCADE)
-    emp_id = models.URLField(max_length=1000,null=True)
+    emp_id = models.URLField()
 
 class Image(models.Model):
     business = models.ForeignKey(Business, on_delete=models.CASCADE)
     type = models.CharField(max_length=255)
     name = models.CharField(max_length=255)
-    url = models.URLField(max_length=1000,null=True)
+    url = models.URLField()
     creator = models.CharField(max_length=255)
     contentLocation = models.CharField(max_length=255)
 
