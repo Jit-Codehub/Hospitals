@@ -11,8 +11,8 @@ STATUS_CHOICE = (
 )
 
 STATUS_PATIENT = (
-    ("yes", "YES"),
-    ("no", "NO"),
+    ("true", "True"),
+    ("false", "False"),
 )
 
 class Currency(models.Model):
