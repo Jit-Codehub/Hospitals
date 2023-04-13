@@ -59,16 +59,22 @@ class ImageInline(admin.StackedInline):
     model = Image
     extra = 0
 
+class Publisherline(admin.StackedInline):
+    insert_after = 'publisher_type'
+
+    model = Publisher
+    extra = 0
+
 class HaspartInline(admin.StackedInline):
-    insert_after = 'pub_url'
+    insert_after = 'website_url'
 
     model = Haspart
     extra = 0
 
 class BusinessAdmin(admin.ModelAdmin):
-    fields = ["type",'map_id','additional_Type','medical_Specialty','curreny_Accepted',"payment_Accepted","hasMap","logo","telephone","isAcceptingNewPatients","knows_language","url","name","AlternateName","description","disambiguatingDescription","foundingDate","SameAs","pub_type","publisher_id","pub_name","website_id","pub_url"]
+    fields = ["type",'map_id','additional_Type','medical_Specialty','curreny_Accepted',"payment_Accepted","hasMap","logo","telephone","isAcceptingNewPatients","knows_language","url","name","AlternateName","description","disambiguatingDescription","foundingDate","SameAs","publisher_type","publisher_name","website_id","website_url"]
 
-    inlines = [AvailableServiceInline,OpeningHoursInline,AdressInline,GeoInline,AreaServedInline,ContactPointInline,EmployeeInline,ImageInline,HaspartInline]
+    inlines = [AvailableServiceInline,OpeningHoursInline,AdressInline,GeoInline,AreaServedInline,ContactPointInline,EmployeeInline,ImageInline,HaspartInline,Publisherline]
 
     change_form_template = 'admin/custom/change_form.html'
     class Media:
