@@ -5,35 +5,6 @@ import json
 def home(request):
     business = Business.objects.prefetch_related('curreny_Accepted', 'knows_language', 'haspart_set', 'availableservice_set', 'openinghours_set', 'adress_set', 'geo_set', 'areaserved_set', 'contactpoint_set', 'employee_set', 'image_set').get(type="Physician")
 
-
-    
-
-    # print(business.name)
-    # print(business.medical_Specialty)
-
-    # for i in business.curreny_Accepted.all():
-    #     print(i)
-    # for i in business.knows_language.all():
-    #     print(i)
-    # for i in business.availableservice_set.all():
-    #     print(i)
-    # for i in business.openinghours_set.all():
-    #     print(i)
-    # for i in business.adress_set.all():
-    #     print(i)
-    # for i in business.geo_set.all():
-    #     print(i)
-    # for i in business.areaserved_set.all():
-    #     print(i)
-    # for i in business.contactpoint_set.all():
-    #     print(i)
-    # for i in business.employee_set.all():
-    #     print(i)
-    # for i in business.image_set.all():
-    #     print(i)
-    # for i in business.haspart_set.all():
-    #     print(i)
-
     l_availableService = []
     for i in business.availableservice_set.all():
         d = {}
@@ -163,8 +134,7 @@ def home(request):
         
         l_haspart.append(d)
 
-# business.isAcceptingNewPatients
-# <script type="application/ld+json">
+
     businessSchema ={
     "@context":"https://schema.org",
     "@graph":[
@@ -208,7 +178,7 @@ def home(request):
         }
     ]
 }
-# </script>
+
 
     business_Schema = '<script type="application/ld+json">'
     business_Schema += json.dumps(businessSchema)

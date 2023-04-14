@@ -1,0 +1,16 @@
+label[for=id_has] {
+    display: none;
+}
+
+div.field-has label {
+    display: none;
+}
+
+
+#has-group div.control-label {
+    display: none;
+}
+
+.readonly {
+    display: none;
+}
