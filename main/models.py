@@ -1,18 +1,18 @@
 from django.db import models
 
 STATUS_CHOICE = (
-    ("sunday", "Sunday"),
-    ("monday", "Monday"),
-    ("tuesday", "Tuesday"),
-    ("wednesday", "Wednesday"),
-    ("thursday", "Thursday"),
-    ("friday", "Friday"),
-    ("saturday", "Saturday"),
+    ("Sunday", "Sunday"),
+    ("Monday", "Monday"),
+    ("Tuesday", "Tuesday"),
+    ("Wednesday", "Wednesday"),
+    ("Thursday", "Thursday"),
+    ("Friday", "Friday"),
+    ("Saturday", "Saturday"),
 )
 
 STATUS_PATIENT = (
-    ("true", "True"),
-    ("false", "False"),
+    ("True", "True"),
+    ("False", "False"),
 )
 
 class Currency(models.Model):
@@ -78,12 +78,12 @@ class OpeningHours(models.Model):
 
 class Adress(models.Model):
     business = models.ForeignKey(Business, on_delete=models.CASCADE)
-    type = models.CharField(max_length=255,blank=True,null=True)
-    postalCode = models.CharField(max_length=255,blank=True,null=True)
-    addressRegion = models.CharField(max_length=255,blank=True,null=True)
-    addressCountry = models.CharField(max_length=255,blank=True,null=True)
-    streetAddress = models.CharField(max_length=500,blank=True,null=True)
-    addressLocality = models.CharField(max_length=500,blank=True,null=True)
+    type = models.CharField(max_length=255)
+    postalCode = models.CharField(max_length=255)
+    addressRegion = models.CharField(max_length=255)
+    addressCountry = models.CharField(max_length=255)
+    streetAddress = models.CharField(max_length=500)
+    addressLocality = models.CharField(max_length=500)
 
 class Geo(models.Model):
     business = models.ForeignKey(Business, on_delete=models.CASCADE)
@@ -103,8 +103,8 @@ class AreaServed(models.Model):
 class ContactPoint(models.Model):
     business = models.ForeignKey(Business, on_delete=models.CASCADE)
     type = models.CharField(max_length=255,blank=True,null=True)
-    contactType = models.CharField(max_length=255,blank=True,null=True)
-    telephone = models.CharField(max_length=255,blank=True,null=True)
+    contactType = models.CharField(max_length=255)
+    telephone = models.CharField(max_length=255)
 
 class Employee(models.Model):
     business = models.ForeignKey(Business, on_delete=models.CASCADE)

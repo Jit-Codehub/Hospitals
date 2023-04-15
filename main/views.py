@@ -22,7 +22,7 @@ def home(request):
             d['description'] = i.description
         l_availableService.append(d)
 
-
+   
     openhours = ''
     for i in business.openinghours_set.all():
         if i.day:
@@ -184,8 +184,12 @@ def home(request):
     business_Schema += json.dumps(businessSchema)
     business_Schema += '</script>'
     
+    #for footer
+    oh = business.openinghours_set.all()
+    add = business.adress_set.all()
+    ct = business.contactpoint_set.all()
 
-    context = {"businessSchema":business_Schema}
+    context = {"businessSchema":business_Schema,"oh":oh,"add":add,"ct":ct}
     return render(request,"home.html",context)
 
 
