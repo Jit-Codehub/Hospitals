@@ -88,6 +88,8 @@ def home(request):
             d['contactType'] = i.contactType
         if i.telephone:
             d['telephone'] = i.telephone
+        if i.email:
+            d['email'] = i.email
         
         l_contactPoint.append(d)
 

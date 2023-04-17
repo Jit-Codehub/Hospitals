@@ -85,3 +85,5 @@ class BusinessAdmin(admin.ModelAdmin):
         }
    
 admin.site.register(Business, BusinessAdmin)
+
+admin.site.register(Question)

@@ -105,6 +105,7 @@ class ContactPoint(models.Model):
     type = models.CharField(max_length=255,blank=True,null=True)
     contactType = models.CharField(max_length=255)
     telephone = models.CharField(max_length=255)
+    email = models.CharField(max_length=255)
 
 class Employee(models.Model):
     business = models.ForeignKey(Business, on_delete=models.CASCADE)
@@ -117,6 +118,13 @@ class Image(models.Model):
     url = models.ImageField(upload_to='images/')
     creator = models.CharField(max_length=255,blank=True,null=True)
     contentLocation = models.CharField(max_length=255,blank=True,null=True)
+
+
+
+class Question(models.Model):
+    name = models.CharField(max_length=255)
+    email = models.EmailField()
+    comment = models.TextField()
 
 
 
