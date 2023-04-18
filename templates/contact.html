@@ -39,34 +39,87 @@
 			margin: 0;
 			padding: 0;
 		}
+
+		.icon-color{
+  color: #009FE3;
+}
 	</style>
 </head>
 <body>
 	<div class="container" >
-		<h1 class="text-center mb-5">Contact Us</h1>
 		<div class="row">
 			<div class="col-md-6">
-				<form>
+				<form  action="" method="POST">
+					{% csrf_token %}
 					<div class="form-group">
-						<label for="name">Name</label>
-						<input type="text" class="form-control" id="name" name="name" required>
+						<input type="text" class="form-control form-control-lg" id="name" name="name" placeholder="Name*" required>
 					</div>
 					<div class="form-group">
-						<label for="email">Email</label>
-						<input type="email" class="form-control" id="email" name="email" required>
+						<input type="email" class="form-control form-control-lg" id="email" name="email" placeholder="Email*" required>
 					</div>
 					<div class="form-group">
-						<label for="message">Message</label>
-						<textarea class="form-control" id="message" name="message" rows="5" required></textarea>
+						<textarea class="form-control form-control-lg" id="message" name="message" rows="5" placeholder="Your Comment" required></textarea>
 					</div>
-					<button type="submit" class="btn btn-primary w-100">Submit</button>
+					<button type="submit" class="btn btn-primary btn-lg btn-block" style="background-color: #009FE3;">Submit</button>
 				</form>
 			</div>
+
+			<div class="col-md-6 mt-2">
+				<h2 class="text-center  fw-bold mb-4">
+					Office Hours
+				  </h2>
+					<table style="margin: auto; ">
+					  <tbody>
+						{% for i in oh %}
+						<tr style="vertical-align: top;">
+						  <td style="width:120px;"><h6 style="font-size: larger;">{{i.day}}</h6></td>
+						  <td style="font-size: large;">{{i.timming}}</td>
+						</tr>
+						{% endfor %}
+					  </tbody>
+					</table>
+
+			</div>
+
 		</div>
+
+		<div class="row">
+			<div class="col-md-12 mt-5">
+
+				<h2 class="text-uppercase   text-center">Contact Us</h2>
+				<table style="margin: auto;">
+				  <tbody>
+					{% for i in add %}
+					<tr>
+					  <td style="vertical-align: top;width: 21px;"><i class="bi bi-geo-alt-fill fa-2x icon-color"></i></td>
+					  <td><h6 style="font-size: larger;">{{i.streetAddress}},{{i.addressLocality}} {{i.postalCode}},{{i.addressRegion}},{{i.addressCountry}}</h6></td>
+					</tr>
+					{% endfor %}
+	  
+					{% for i in ct %}
+					<tr>
+					  <td style="vertical-align: top;width: 21px;"><i class="bi bi-telephone-fill fa-2x icon-color"></i></td>
+					  <td><h6 style="font-size: larger;">{{i.telephone}}</h6></td>
+					</tr>
+					{% endfor %}
+
+					{% for i in ct %}
+					<tr>
+					  <td style="vertical-align: top;width: 21px;"><i class="bi bi-envelope-fill fa-2x icon-color"></i></td>
+					  <td><h6 style="font-size: larger;">{{i.email}}</h6></td>
+					</tr>
+					{% endfor %}
+				  </tbody>
+				</table>
+	  
+			</div>
+		</div>
+
+
 		<div class="row">
 			<div class="col-md-12">
 				<div class="map">
-					<iframe src="https://www.google.com/maps?cid=11869484483980560186&output=embed" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+					<iframe src="{{map}}&output=embed" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
 				</div>
 			</div>
 		</div>

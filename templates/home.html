@@ -79,13 +79,17 @@
               {% for i in ct %}
               <tr>
                 <td style="vertical-align: top;width: 21px;"><i class="bi bi-telephone"></i></td>
-                <td>{{i.contactType}}<br>{{i.telephone}}</td>
+                <td>{{i.telephone}}</td>
               </tr>
+              {% endfor %}
+
+              {% for i in ct %}
               <tr>
                 <td style="vertical-align: top;width: 21px;"><i class="bi bi-envelope"></i></td>
                 <td>{{i.email}}</td>
               </tr>
               {% endfor %}
+            
             </tbody>
           </table>
 

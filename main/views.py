@@ -196,4 +196,27 @@ def home(request):
 
 
 
+def contact(request):
+
+    business = Business.objects.prefetch_related('openinghours_set', 'adress_set', 'contactpoint_set',).get(type="Physician")
+
+    #for footer
+    oh = business.openinghours_set.all()
+    add = business.adress_set.all()
+    ct = business.contactpoint_set.all()
+
+    # print(request)
+    print(business.map_id)
+    name = request.POST["name"]
+    email = request.POST["email"]
+    message = request.POST["message"]
+    question = Question(name=name,email=email,comment=message)
+    question.save()
+    
+    context = {"oh":oh,"add":add,"ct":ct,"map":business.map_id}
+    # return render(request,"contact-us.html")
+    return render(request,"contact.html",context)
+
+
+
 

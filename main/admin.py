@@ -86,4 +86,11 @@ class BusinessAdmin(admin.ModelAdmin):
    
 admin.site.register(Business, BusinessAdmin)
 
-admin.site.register(Question)
+
+
+class QuestionAdmin(admin.ModelAdmin):
+    list_display = ["name","date"]
+    readonly_fields = ("date",)
+
+
+admin.site.register(Question,QuestionAdmin)
